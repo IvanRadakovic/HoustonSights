@@ -19,6 +19,7 @@ import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -68,7 +69,7 @@ public class TourActivity extends AppCompatActivity implements OnMapReadyCallbac
     private LocationManager locationManager;
     ArrayList<LatLng> markerPoints;
     GoogleApiClient mGoogleApiClient;
-
+    Button button;
 
 
     @Override
@@ -81,6 +82,18 @@ public class TourActivity extends AppCompatActivity implements OnMapReadyCallbac
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
+        button = (Button) findViewById(R.id.button12);
+        button.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                if(poly.size()>0 && markers.size()>0){
+                    poly.get(0).remove();
+                    poly.remove(0);
+                    markers.get(0).remove();
+                    markers.remove(0);
+                }
+            }
+        });
+
         tts=new TextToSpeech(TourActivity.this, new TextToSpeech.OnInitListener() {
 
             @Override
@@ -137,7 +150,7 @@ public class TourActivity extends AppCompatActivity implements OnMapReadyCallbac
             map.setMyLocationEnabled(true);
 
             // Setting onclick event listener for the map
-            map.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
+            /*map.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
 
                 @Override
                 public void onMapClick(LatLng point) {
@@ -161,7 +174,7 @@ public class TourActivity extends AppCompatActivity implements OnMapReadyCallbac
                      * For the start location, the color of marker is GREEN and
                      * for the end location, the color of marker is RED.
                      */
-                    if (markerPoints.size() == 1) {
+                    /*if (markerPoints.size() == 1) {
                         options.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE));
                     } else {
                         options.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED));
@@ -172,7 +185,7 @@ public class TourActivity extends AppCompatActivity implements OnMapReadyCallbac
 
                     createPath();
                 }
-            });
+            });*/
             if (mGoogleApiClient == null) {
                 mGoogleApiClient = new GoogleApiClient.Builder(this)
                         .addConnectionCallbacks(this)
@@ -223,6 +236,7 @@ public class TourActivity extends AppCompatActivity implements OnMapReadyCallbac
 
     }
 
+
     @Override
     public void onConnected(@Nullable Bundle bundle) {
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
@@ -261,6 +275,14 @@ public class TourActivity extends AppCompatActivity implements OnMapReadyCallbac
     @Override
     public void onConnectionSuspended(int i) {
 
+    }
+
+    public void replaceFL(ArrayList arr){
+        if(arr.size()>1) {
+            //arr.remove(0);
+            arr.add(0, arr.get(arr.size() - 1));
+            arr.remove(arr.size() - 1);
+        }
     }
 
     private void createPath() {
@@ -387,17 +409,60 @@ public class TourActivity extends AppCompatActivity implements OnMapReadyCallbac
         }
         return data;
     }
-
+    boolean tmp = true;
     @Override
     public void onLocationChanged(Location location) {
         LatLng point = new LatLng(location.getLatitude(),location.getLongitude());
         Log.e("onLocationChanged", "called");
-        LatLng latLng = new LatLng(location.getLatitude(), location.getLongitude());
-        /*CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(latLng, 19);
+        /*CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(point, 19);
         map.animateCamera(cameraUpdate); UNCOMMENT THIS WHEN DONE TESTING */
         if(places.size()>2 && Math.abs(location.getLatitude()-places.get(1).getLatitude())<=.0001 && Math.abs(location.getLongitude()-places.get(1).getLongitude())<=.0001){
-            poly.get(0).remove();
+            /*poly.get(0).remove();
+            poly.remove(0);
+            /*LatLng ll1 = new LatLng(places.get(1).getLatitude(),places.get(1).getLongitude());
+            LatLng ll2 = new LatLng(places.get(2).getLatitude(),places.get(2).getLongitude());
+            createPath3(ll1,ll2,"hl");*/
+            /*nametxt.setText(places.get(1).getName());
+            desctxt.setText(places.get(1).getDescription());
+            places.remove(0);
+            markers.get(0).remove();
+            markers.remove(0);
+            ConvertTextToSpeech(places.get(0).getDescription());
+            replaceFL(poly);*/
+            
+        } else if(places.size()==2 && Math.abs(location.getLatitude()-places.get(1).getLatitude())<=.0001 && Math.abs(location.getLongitude()-places.get(1).getLongitude())<=.0001){
+            /*poly.get(0).remove();
+            poly.remove(0);
+            /*LatLng ll1 = new LatLng(places.get(1).getLatitude(),places.get(1).getLongitude());
+            LatLng ll2 = new LatLng(places.get(0).getLatitude(),places.get(0).getLongitude());
+            createPath3(ll1,ll2,"hl");*/
+            /*nametxt.setText(places.get(1).getName());
+            desctxt.setText(places.get(1).getDescription());
+            places.remove(0);
+            ConvertTextToSpeech(places.get(0).getDescription());*/
+        } else {
+            /*poly.get(0).remove();
+            poly.remove(0);
+            LatLng ll1 = new LatLng(places.get(0).getLatitude(),places.get(0).getLongitude());
+            createPath3(point,ll1,"hl");
+            replaceFL(poly);*/
+        }
+        if(!tmp){
+            tmp=true;
+            poly.get(1).remove();
             poly.remove(1);
+            markers.get(1).remove();
+            markers.remove(1);
+            markers.get(0).remove();
+            markers.remove(0);
+            markers.get(2).remove();
+            markers.remove(2);
+        }
+    }
+
+    public void skip(LatLng latLng){
+        if(places.size()>2){
+            poly.get(0).remove();
             poly.remove(0);
             LatLng ll1 = new LatLng(places.get(1).getLatitude(),places.get(1).getLongitude());
             LatLng ll2 = new LatLng(places.get(2).getLatitude(),places.get(2).getLongitude());
@@ -407,21 +472,8 @@ public class TourActivity extends AppCompatActivity implements OnMapReadyCallbac
             places.remove(0);
             markers.get(0).remove();
             markers.remove(0);
-            ConvertTextToSpeech(places.get(0).getDescription());
+            replaceFL(poly);
         }
-        if(places.size()==2 && Math.abs(location.getLatitude()-places.get(1).getLatitude())<=.0001 && Math.abs(location.getLongitude()-places.get(1).getLongitude())<=.0001){
-            poly.get(0).remove();
-            poly.remove(1);
-            poly.remove(0);
-            LatLng ll1 = new LatLng(places.get(1).getLatitude(),places.get(1).getLongitude());
-            LatLng ll2 = new LatLng(places.get(0).getLatitude(),places.get(0).getLongitude());
-            createPath3(ll1,ll2,"hl");
-            nametxt.setText(places.get(1).getName());
-            desctxt.setText(places.get(1).getDescription());
-            places.remove(0);
-            ConvertTextToSpeech(places.get(0).getDescription());
-        }
-
     }
 
     @Override
