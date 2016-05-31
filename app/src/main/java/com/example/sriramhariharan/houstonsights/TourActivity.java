@@ -72,6 +72,7 @@ public class TourActivity extends AppCompatActivity implements OnMapReadyCallbac
     GoogleApiClient mGoogleApiClient;
     Button button;
     LocationAdapter la;
+    public static boolean generated = false;
     //hello
 
 
@@ -266,54 +267,56 @@ public class TourActivity extends AppCompatActivity implements OnMapReadyCallbac
 
     @Override
     public void onConnected(@Nullable Bundle bundle) {
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            return;
-        }
-        //s
-        Location mLastLocation = LocationServices.FusedLocationApi.getLastLocation(
-                mGoogleApiClient);
-        if (mLastLocation != null) {
-            //putMarker(mLastLocation.getLatitude(),mLastLocation.getLongitude(),"blue");
-            LatLng latLng = new LatLng(mLastLocation.getLatitude(), mLastLocation.getLongitude());
-            //LatLng latLng = new LatLng(29.7522, -95.3756);
-            CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(latLng, 19);
-            map.animateCamera(cameraUpdate);  /*                    UNCOMMENT THIS WHEN DONE TESTING*/
-            places = Generator.getTour(Values.range,mLastLocation.getLatitude(),mLastLocation.getLongitude());
-            if(places.size()>0) {
-                places.add(places.get(0));
-                places.remove(0);
+        if(!generated) {
+            if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+                return;
             }
-            // places = Generator.getTour(Values.range,29.7522,-95.3756);
-            la = new LocationAdapter(getApplicationContext(),places);
-            yourListView.setAdapter(la);
-            yourListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                @Override
-                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                    Log.d("CLICKED","hello");
+            //s
+            Location mLastLocation = LocationServices.FusedLocationApi.getLastLocation(
+                    mGoogleApiClient);
+            if (mLastLocation != null) {
+                //putMarker(mLastLocation.getLatitude(),mLastLocation.getLongitude(),"blue");
+                LatLng latLng = new LatLng(mLastLocation.getLatitude(), mLastLocation.getLongitude());
+                //LatLng latLng = new LatLng(29.7522, -95.3756);
+                CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(latLng, 19);
+                map.animateCamera(cameraUpdate);  /*                    UNCOMMENT THIS WHEN DONE TESTING*/
+                places = Generator.getTour(Values.range, mLastLocation.getLatitude(), mLastLocation.getLongitude());
+                if (places.size() > 0) {
+                    places.add(places.get(0));
+                    places.remove(0);
                 }
-            });
-            // ErrorSpot
-            la.notifyDataSetChanged();
-            for(Place p : places){
-                putMarker(p.getLatitude(),p.getLongitude(),"red", p.getName());
-            }
-            if(places.size()>1)createPath2(places.get(places.size()-1),places.get(0),"norm");
-            for(int i=places.size()-1;i>0;i--){
-                if(i==1){
-                    //createPath2(places.get(i-1),places.get(i),"hl");
+                // places = Generator.getTour(Values.range,29.7522,-95.3756);
+                la = new LocationAdapter(getApplicationContext(), places);
+                yourListView.setAdapter(la);
+                yourListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                        Log.d("CLICKED", "hello");
+                    }
+                });
+                // ErrorSpot
+                la.notifyDataSetChanged();
+                for (Place p : places) {
+                    putMarker(p.getLatitude(), p.getLongitude(), "red", p.getName());
                 }
-                else createPath2(places.get(i-1),places.get(i),"norm");
-            }
-            if(places.size()>1) {
-                //nametxt.setText(places.get(1).getName());
-                //desctxt.setText(places.get(1).getDescription());
-            }
+                if (places.size() > 1)
+                    createPath2(places.get(places.size() - 1), places.get(0), "norm");
+                for (int i = places.size() - 1; i > 0; i--) {
+                    if (i == 1) {
+                        //createPath2(places.get(i-1),places.get(i),"hl");
+                    } else createPath2(places.get(i - 1), places.get(i), "norm");
+                }
+                if (places.size() > 1) {
+                    //nametxt.setText(places.get(1).getName());
+                    //desctxt.setText(places.get(1).getDescription());
+                }
             /*for(int i=1;i<places.size()-1;i++){
                 if(i==1)createPath2(places.get(i-1),places.get(i),"hl");
                 else createPath2(places.get(i-1),places.get(i),"norm");
             }*/
+                generated = true;
+            }
         }
-
     }
 
     @Override
