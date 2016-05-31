@@ -470,20 +470,7 @@ public class TourActivity extends AppCompatActivity implements OnMapReadyCallbac
             ConvertTextToSpeech(places.get(0).getDescription());
             places.remove(0);
         }
-        if(currpath!=null)currpath.remove();
         createPat4(point,places.get(0));
-
-        if(!tmp){
-            tmp=true;
-            poly.get(1).remove();
-            poly.remove(1);
-            markers.get(1).remove();
-            markers.remove(1);
-            markers.get(0).remove();
-            markers.remove(0);
-            markers.get(2).remove();
-            markers.remove(2);
-        }
     }
 
     public void skip(LatLng latLng){
@@ -843,9 +830,11 @@ public class TourActivity extends AppCompatActivity implements OnMapReadyCallbac
             }
 
             // Drawing polyline in the Google Map for the i-th route
+            Polyline p=currpath;
             if(lineOptions!=null) {
                 currpath=map.addPolyline(lineOptions);
             }
+            if(p!=null)p.remove();
         }
     }
 }
