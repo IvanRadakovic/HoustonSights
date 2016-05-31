@@ -135,7 +135,7 @@ public class Generator {
 		locations.add(new Place("George Bush Monument", "landmark,history,park", "110 Bagby St, Houston, TX 77002",
 				29.765771, -95.366506,
 				"Located in Sesquicentennial Park, the garden features an eight-foot bronze sculpture of former president George H. Bush by artist Chas Fagan of Charlotte, North Carolina and a semicircular wall of four bas-reliefs by Houston artist Wei-li Willy Wang that depict President Bush as a Navy pilot in World War II; as a Houston oilman and member of Congress; with Mikhail Gorbachev in managing the peaceful end of the Cold War; and with wife Barbara attending the Inaugural of their oldest son as 43rd president."));
-		locations.add(new Place("HTC", "science", "", 29.752232, -95.375682, ""));
+		locations.add(new Place("Houston Technology Center", "science", "", 29.752232, -95.375682, "The Houston Technology Center is generously supported by more than 300 of Houston’s leading corporations and academic institutions, as well as the Greater Houston Partnership, Texas Medical Center, NASA-Johnson Space Center and the City of Houston. Since 1999, HTC has provided feedback to well over 1,000 companies and coached more than 250 companies."));
 		return locations;
 	}
 
