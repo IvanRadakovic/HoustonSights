@@ -99,18 +99,6 @@ public class TourActivity extends AppCompatActivity implements OnMapReadyCallbac
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
-        button = (Button) findViewById(R.id.button12);
-        button.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                if(poly.size()>0 && markers.size()>0){
-                    poly.get(0).remove();
-                    poly.remove(0);
-                    markers.get(0).remove();
-                    markers.remove(0);
-                }
-            }
-        });
-
         tts=new TextToSpeech(TourActivity.this, new TextToSpeech.OnInitListener() {
 
             @Override
