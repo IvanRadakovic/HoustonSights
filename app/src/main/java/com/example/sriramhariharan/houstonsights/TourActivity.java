@@ -242,6 +242,7 @@ public class TourActivity extends AppCompatActivity implements OnMapReadyCallbac
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             return;
         }
+        //s
         Location mLastLocation = LocationServices.FusedLocationApi.getLastLocation(
                 mGoogleApiClient);
         if (mLastLocation != null) {
@@ -429,7 +430,7 @@ public class TourActivity extends AppCompatActivity implements OnMapReadyCallbac
             markers.remove(0);
             ConvertTextToSpeech(places.get(0).getDescription());
             replaceFL(poly);*/
-            
+
         } else if(places.size()==2 && Math.abs(location.getLatitude()-places.get(1).getLatitude())<=.0001 && Math.abs(location.getLongitude()-places.get(1).getLongitude())<=.0001){
             /*poly.get(0).remove();
             poly.remove(0);
