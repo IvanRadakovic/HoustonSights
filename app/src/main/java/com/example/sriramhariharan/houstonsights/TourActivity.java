@@ -471,8 +471,8 @@ public class TourActivity extends AppCompatActivity implements OnMapReadyCallbac
             createPath3(point,ll1,"hl");
             replaceFL(poly);*/
         }
-        if(places.size()>=2 && Math.abs(location.getLatitude()-places.get(1).getLatitude())<=.0001 &&
-                Math.abs(location.getLongitude()-places.get(1).getLongitude())<=.0001 && poly.size()>0 && markers.size()>0){
+        if(places.size()>=2 && Math.abs(location.getLatitude()-places.get(0).getLatitude())<=.0001 &&
+                Math.abs(location.getLongitude()-places.get(0).getLongitude())<=.0001 && poly.size()>0 && markers.size()>0){
             poly.get(poly.size()-1).remove();
             poly.remove(poly.size()-1);
             markers.get(0).remove();
