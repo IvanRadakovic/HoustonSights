@@ -476,39 +476,8 @@ public class TourActivity extends AppCompatActivity implements OnMapReadyCallbac
     public void onLocationChanged(Location location) {
         LatLng point = new LatLng(location.getLatitude(),location.getLongitude());
         Log.e("onLocationChanged", "called");
-        /*CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(point, 19);
-        map.animateCamera(cameraUpdate); UNCOMMENT THIS WHEN DONE TESTING */
-        if(places.size()>2 && Math.abs(location.getLatitude()-places.get(1).getLatitude())<=.0001 && Math.abs(location.getLongitude()-places.get(1).getLongitude())<=.0001){
-            /*poly.get(0).remove();
-            poly.remove(0);
-            /*LatLng ll1 = new LatLng(places.get(1).getLatitude(),places.get(1).getLongitude());
-            LatLng ll2 = new LatLng(places.get(2).getLatitude(),places.get(2).getLongitude());
-            createPath3(ll1,ll2,"hl");*/
-            /*nametxt.setText(places.get(1).getName());
-            desctxt.setText(places.get(1).getDescription());
-            places.remove(0);
-            markers.get(0).remove();
-            markers.remove(0);
-            ConvertTextToSpeech(places.get(0).getDescription());
-            replaceFL(poly);*/
-
-        } else if(places.size()==2 && Math.abs(location.getLatitude()-places.get(1).getLatitude())<=.0001 && Math.abs(location.getLongitude()-places.get(1).getLongitude())<=.0001){
-            /*poly.get(0).remove();
-            poly.remove(0);
-            /*LatLng ll1 = new LatLng(places.get(1).getLatitude(),places.get(1).getLongitude());
-            LatLng ll2 = new LatLng(places.get(0).getLatitude(),places.get(0).getLongitude());
-            createPath3(ll1,ll2,"hl");*/
-            /*nametxt.setText(places.get(1).getName());
-            desctxt.setText(places.get(1).getDescription());
-            places.remove(0);
-            ConvertTextToSpeech(places.get(0).getDescription());*/
-        } else {
-            /*poly.get(0).remove();
-            poly.remove(0);
-            LatLng ll1 = new LatLng(places.get(0).getLatitude(),places.get(0).getLongitude());
-            createPath3(point,ll1,"hl");
-            replaceFL(poly);*/
-        }
+        CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(point, 19);
+        map.animateCamera(cameraUpdate); /* UNCOMMENT THIS WHEN DONE TESTING */
         if(places.size()>=2 && Math.abs(location.getLatitude()-places.get(0).getLatitude())<=.0001 &&
                 Math.abs(location.getLongitude()-places.get(0).getLongitude())<=.0001 && poly.size()>0 && markers.size()>0){
             poly.get(poly.size()-1).remove();
@@ -517,6 +486,9 @@ public class TourActivity extends AppCompatActivity implements OnMapReadyCallbac
             markers.remove(0);
             ConvertTextToSpeech(places.get(0).getDescription());
             places.remove(0);
+        } else if(places.size()==1 && Math.abs(location.getLatitude()-places.get(0).getLatitude())<=.0001 &&
+                Math.abs(location.getLongitude()-places.get(0).getLongitude())<=.0001){
+            //AddActivity Here
         }
         createPat4(point,places.get(0));
     }
