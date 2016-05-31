@@ -4,6 +4,7 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -47,6 +48,7 @@ public class LocationAdapter extends BaseAdapter {
         TextView info;
         ImageView im;
     }
+
     public View getView(int position, View convertView, ViewGroup parent)
     {
         Holder holder = new Holder();
@@ -58,7 +60,13 @@ public class LocationAdapter extends BaseAdapter {
         holder.place.setText(places.get(position).getName());
      //   holder.info.setText(places.get(position).getInfo());
         holder.info.setText("info goes here");
-        String tag = places.get(position).getTags().substring(0,places.get(position).getTags().indexOf(","));
+        String tag = "";
+        if(places.get(position).getTags().contains(",")) {
+            tag = places.get(position).getTags().substring(0, places.get(position).getTags().indexOf(","));
+        }
+        else{
+           tag = places.get(position).getTags();
+        }
         if(tag.equals("history")){
             holder.im.setImageResource(R.drawable.museum_war);
         }

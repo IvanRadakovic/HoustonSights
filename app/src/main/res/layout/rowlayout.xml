@@ -11,8 +11,10 @@
         android:layout_height="wrap_content">
         <TextView
             android:layout_width="wrap_content"
+            android:textColor="#000"
             android:id="@+id/Destinationtitle"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
             android:text="hello"
             android:layout_marginBottom="5dp"
             android:textSize="20dp"
@@ -22,6 +24,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="helllooo"
+            android:textColor="#000"
+            android:layout_marginLeft="10dp"
             android:id="@+id/moreinfo"
             />
     </LinearLayout>

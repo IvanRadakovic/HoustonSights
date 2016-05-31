@@ -19,6 +19,7 @@ import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
@@ -71,6 +72,7 @@ public class TourActivity extends AppCompatActivity implements OnMapReadyCallbac
     GoogleApiClient mGoogleApiClient;
     Button button;
     LocationAdapter la;
+    //hello
 
 
     public void addItems(Place x) {
@@ -94,8 +96,10 @@ public class TourActivity extends AppCompatActivity implements OnMapReadyCallbac
         setContentView(R.layout.activity_tour);
         yourListView = (ListView)findViewById(R.id.list);
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
-        la = new LocationAdapter(getApplicationContext(),places);
-        yourListView.setAdapter(la);
+       // Place pl = new Place("hello","hello,","hello",50,50,"HELLO");
+      //  places.add(pl);
+     //   la = new LocationAdapter(getApplicationContext(),places);
+     //   yourListView.setAdapter(la);
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
@@ -257,7 +261,15 @@ public class TourActivity extends AppCompatActivity implements OnMapReadyCallbac
             CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(latLng, 19);
             map.animateCamera(cameraUpdate);  /*                    UNCOMMENT THIS WHEN DONE TESTING*/
             places = Generator.getTour(Values.range,mLastLocation.getLatitude(),mLastLocation.getLongitude());
-            //places = Generator.getTour(Values.range,29.7522,-95.3756);
+           // places = Generator.getTour(Values.range,29.7522,-95.3756);
+            la = new LocationAdapter(getApplicationContext(),places);
+            yourListView.setAdapter(la);
+            yourListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                    Log.d("CLICKED","hello");
+                }
+            });
             // ErrorSpot
             la.notifyDataSetChanged();
             for(Place p : places){
