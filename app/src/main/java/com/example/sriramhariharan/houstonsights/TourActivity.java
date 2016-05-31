@@ -73,15 +73,15 @@ public class TourActivity extends AppCompatActivity implements OnMapReadyCallbac
     LocationAdapter la;
 
 
-    public void addItems(View v, Place x) {
+    public void addItems(Place x) {
         places.add(x);
         la.notifyDataSetChanged();
     }
-    public void addItems(View v, Place x,int index) {
+    public void addItems(Place x,int index) {
         places.add(index, x);
         la.notifyDataSetChanged();
     }
-    public void removeItems(View v, int index) {
+    public void removeItems(int index) {
         places.remove(index);
         la.notifyDataSetChanged();
     }
@@ -129,8 +129,8 @@ public class TourActivity extends AppCompatActivity implements OnMapReadyCallbac
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             return;
         }
-        nametxt = (TextView)findViewById(R.id.nametxt);
-        desctxt = (TextView)findViewById(R.id.desctxt);
+        //nametxt = (TextView)findViewById(R.id.nametxt);
+        //desctxt = (TextView)findViewById(R.id.desctxt);
         locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER,
                 500,   // 3 sec
                 0, this);
@@ -258,8 +258,10 @@ public class TourActivity extends AppCompatActivity implements OnMapReadyCallbac
             map.animateCamera(cameraUpdate);  /*                    UNCOMMENT THIS WHEN DONE TESTING*/
             //places = Generator.getTour(Values.range,mLastLocation.getLatitude(),mLastLocation.getLongitude());
             places = Generator.getTour(Values.range,29.7522,-95.3756);
+            la.notifyDataSetChanged();
             for(Place p : places){
                 putMarker(p.getLatitude(),p.getLongitude(),"red");
+                //addItems(p);
             }
             if(places.size()>1)createPath2(places.get(places.size()-1),places.get(0),"norm");
             for(int i=places.size()-1;i>0;i--){
@@ -269,8 +271,8 @@ public class TourActivity extends AppCompatActivity implements OnMapReadyCallbac
                 else createPath2(places.get(i-1),places.get(i),"norm");
             }
             if(places.size()>1) {
-                nametxt.setText(places.get(1).getName());
-                desctxt.setText(places.get(1).getDescription());
+                //nametxt.setText(places.get(1).getName());
+                //desctxt.setText(places.get(1).getDescription());
             }
             /*for(int i=1;i<places.size()-1;i++){
                 if(i==1)createPath2(places.get(i-1),places.get(i),"hl");
@@ -479,17 +481,7 @@ public class TourActivity extends AppCompatActivity implements OnMapReadyCallbac
 
     public void skip(LatLng latLng){
         if(places.size()>2){
-            poly.get(0).remove();
-            poly.remove(0);
-            LatLng ll1 = new LatLng(places.get(1).getLatitude(),places.get(1).getLongitude());
-            LatLng ll2 = new LatLng(places.get(2).getLatitude(),places.get(2).getLongitude());
-            createPath3(ll1,ll2,"hl");
-            nametxt.setText(places.get(1).getName());
-            desctxt.setText(places.get(1).getDescription());
-            places.remove(0);
-            markers.get(0).remove();
-            markers.remove(0);
-            replaceFL(poly);
+
         }
     }
 
