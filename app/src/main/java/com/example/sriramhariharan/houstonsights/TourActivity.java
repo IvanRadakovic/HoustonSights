@@ -415,7 +415,12 @@ public class TourActivity extends AppCompatActivity implements OnMapReadyCallbac
         String transportation = "mode=walking";
 
         // Building the parameters to the web service
-        String parameters = str_origin + "&" + str_dest + "&" + sensor + "&" + transportation;
+        String parameters;
+        if(Values.directiontype.equals("Walking")){
+            parameters = str_origin + "&" + str_dest + "&" + sensor + "&" + transportation;
+        } else {
+            parameters = str_origin + "&" + str_dest + "&" + sensor;
+        }
 
         // Output format
         String output = "json";
