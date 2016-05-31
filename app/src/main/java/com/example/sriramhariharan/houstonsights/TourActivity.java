@@ -527,7 +527,10 @@ public class TourActivity extends AppCompatActivity implements OnMapReadyCallbac
             }
 
             // Drawing polyline in the Google Map for the i-th route
-            poly.add(map.addPolyline(lineOptions));
+            if(lineOptions!=null) {
+                poly.add(map.addPolyline(lineOptions));
+            }
+            //map.addPolyline(lineOptions);
         }
     }
     @Override
@@ -662,7 +665,9 @@ public class TourActivity extends AppCompatActivity implements OnMapReadyCallbac
             }
 
             // Drawing polyline in the Google Map for the i-th route
-            poly.add(map.addPolyline(lineOptions));
+            if(lineOptions!=null) {
+                poly.add(map.addPolyline(lineOptions));
+            }
         }
     }
 
