@@ -70,6 +70,7 @@ public class TourActivity extends AppCompatActivity implements OnMapReadyCallbac
     ArrayList<LatLng> markerPoints;
     GoogleApiClient mGoogleApiClient;
     Button button;
+    Polyline currpath;
 
 
     @Override
@@ -246,7 +247,7 @@ public class TourActivity extends AppCompatActivity implements OnMapReadyCallbac
         Location mLastLocation = LocationServices.FusedLocationApi.getLastLocation(
                 mGoogleApiClient);
         if (mLastLocation != null) {
-            putMarker(mLastLocation.getLatitude(),mLastLocation.getLongitude(),"blue");
+            //putMarker(mLastLocation.getLatitude(),mLastLocation.getLongitude(),"blue");
             //LatLng latLng = new LatLng(mLastLocation.getLatitude(), mLastLocation.getLongitude());
             LatLng latLng = new LatLng(29.7522, -95.3756);
             CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(latLng, 19);
@@ -258,7 +259,9 @@ public class TourActivity extends AppCompatActivity implements OnMapReadyCallbac
             }
             if(places.size()>1)createPath2(places.get(places.size()-1),places.get(0),"norm");
             for(int i=places.size()-1;i>0;i--){
-                if(i==1)createPath2(places.get(i-1),places.get(i),"hl");
+                if(i==1){
+                    //createPath2(places.get(i-1),places.get(i),"hl");
+                }
                 else createPath2(places.get(i-1),places.get(i),"norm");
             }
             if(places.size()>1) {
@@ -343,6 +346,16 @@ public class TourActivity extends AppCompatActivity implements OnMapReadyCallbac
             DownloadTask downloadTask = new DownloadTask();
             downloadTask.execute(url);
         }
+    }
+    private void createPat4(LatLng l1, Place p2){
+
+        LatLng origin = l1;
+        LatLng dest = new LatLng(p2.getLatitude(),p2.getLongitude());
+        // Getting URL to the Google Directions API
+        String url = getDirectionsUrl(origin, dest);
+        // Start downloading json data from Google Directions API
+        DownloadTask3 downloadTask = new DownloadTask3();
+        downloadTask.execute(url);
     }
     private String getDirectionsUrl(LatLng origin, LatLng dest) {
 
@@ -448,6 +461,18 @@ public class TourActivity extends AppCompatActivity implements OnMapReadyCallbac
             createPath3(point,ll1,"hl");
             replaceFL(poly);*/
         }
+        if(places.size()>=2 && Math.abs(location.getLatitude()-places.get(1).getLatitude())<=.0001 &&
+                Math.abs(location.getLongitude()-places.get(1).getLongitude())<=.0001){
+            poly.get(poly.size()-1).remove();
+            poly.remove(poly.size()-1);
+            markers.get(0).remove();
+            markers.remove(0);
+            ConvertTextToSpeech(places.get(0).getDescription());
+            places.remove(0);
+        }
+        if(currpath!=null)currpath.remove();
+        createPat4(point,places.get(0));
+
         if(!tmp){
             tmp=true;
             poly.get(1).remove();
@@ -731,4 +756,96 @@ public class TourActivity extends AppCompatActivity implements OnMapReadyCallbac
         getMenuInflater().inflate(R.menu.main, menu);
         return true;
     }*/
+    private class DownloadTask3 extends AsyncTask<String, Void, String> {
+
+        // Downloading data in non-ui thread
+        @Override
+        protected String doInBackground(String... url) {
+
+            // For storing data from web service
+            String data = "";
+
+            try{
+                // Fetching the data from web service
+                data = downloadUrl(url[0]);
+            }catch(Exception e){
+                Log.d("Background Task",e.toString());
+            }
+            return data;
+        }
+
+        // Executes in UI thread, after the execution of
+        // doInBackground()
+        @Override
+        protected void onPostExecute(String result) {
+            super.onPostExecute(result);
+
+            ParserTask3 parserTask = new ParserTask3();
+
+            // Invokes the thread for parsing the JSON data
+            parserTask.execute(result);
+        }
+    }
+
+    /** A class to parse the Google Places in JSON format */
+    private class ParserTask3 extends AsyncTask<String, Integer, List<List<HashMap<String,String>>> >{
+
+        // Parsing the data in non-ui thread
+        @Override
+        protected List<List<HashMap<String, String>>> doInBackground(String... jsonData) {
+
+            JSONObject jObject;
+            List<List<HashMap<String, String>>> routes = null;
+
+            try{
+                jObject = new JSONObject(jsonData[0]);
+                DirectionsJSONParser parser = new DirectionsJSONParser();
+
+                // Starts parsing data
+                routes = parser.parse(jObject);
+            }catch(Exception e){
+                e.printStackTrace();
+            }
+            return routes;
+        }
+
+        // Executes in UI thread, after the parsing process
+        @Override
+        protected void onPostExecute(List<List<HashMap<String, String>>> result) {
+            ArrayList<LatLng> points = null;
+            PolylineOptions lineOptions = null;
+            MarkerOptions markerOptions = new MarkerOptions();
+
+            // Traversing through all the routes
+            for(int i=0;i<result.size();i++){
+                points = new ArrayList<LatLng>();
+                lineOptions = new PolylineOptions();
+
+                // Fetching i-th route
+                List<HashMap<String, String>> path = result.get(i);
+
+                // Fetching all the points in i-th route
+                for(int j=0;j<path.size();j++){
+                    HashMap<String,String> point = path.get(j);
+
+                    double lat = Double.parseDouble(point.get("lat"));
+                    double lng = Double.parseDouble(point.get("lng"));
+                    LatLng position = new LatLng(lat, lng);
+
+                    points.add(position);
+                }
+
+                // Adding all the points in the route to LineOptions
+                lineOptions.addAll(points);
+                lineOptions.width(20);
+                //lineOptions.color(Color.parseColor("#FF9800"));
+                lineOptions.color(Color.parseColor("#c73366"));
+            }
+
+            // Drawing polyline in the Google Map for the i-th route
+            if(lineOptions!=null) {
+                currpath=map.addPolyline(lineOptions);
+            }
+        }
+    }
 }
