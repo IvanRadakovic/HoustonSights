@@ -70,6 +70,21 @@ public class TourActivity extends AppCompatActivity implements OnMapReadyCallbac
     ArrayList<LatLng> markerPoints;
     GoogleApiClient mGoogleApiClient;
     Button button;
+    LocationAdapter la;
+
+
+    public void addItems(View v, Place x) {
+        places.add(x);
+        la.notifyDataSetChanged();
+    }
+    public void addItems(View v, Place x,int index) {
+        places.add(index, x);
+        la.notifyDataSetChanged();
+    }
+    public void removeItems(View v, int index) {
+        places.remove(index);
+        la.notifyDataSetChanged();
+    }
     Polyline currpath;
 
 
@@ -79,7 +94,8 @@ public class TourActivity extends AppCompatActivity implements OnMapReadyCallbac
         setContentView(R.layout.activity_tour);
         yourListView = (ListView)findViewById(R.id.list);
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
-        //yourListView.setAdapter(new LocationAdapter(getApplicationContext(),places));
+        la = new LocationAdapter(getApplicationContext(),places);
+        // yourListView.setAdapter(new LocationAdapter(getApplicationContext(),places));
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);

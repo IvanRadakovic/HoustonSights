@@ -6,7 +6,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.EditText;
+import android.widget.Switch;
 import android.widget.Toast;
 
 import java.util.Locale;
@@ -44,6 +46,20 @@ public class ChooseTour extends AppCompatActivity {
         spiritual = (CheckBox)findViewById(R.id.spiritualcheckbox);
         entertainment = (CheckBox)findViewById(R.id.entertainmentcheckbox);
         //hello this is srirams change
+        Switch directionssiwtch = (Switch)  findViewById(R.id.directswitch);
+        assert directionssiwtch != null;
+        directionssiwtch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener(){
+
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if(isChecked){
+                    Values.directiontype = "Walking";
+                }
+                else{
+                    Values.directiontype = "Driving";
+                }
+            }
+        });
     }
 
     public void everythingClicked(View view){
