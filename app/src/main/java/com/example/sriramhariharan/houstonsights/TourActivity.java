@@ -670,6 +670,7 @@ public class TourActivity extends AppCompatActivity implements OnMapReadyCallbac
             }
         }
     }
+    //test
 
     /*@Override
     public boolean onCreateOptionsMenu(Menu menu) {
