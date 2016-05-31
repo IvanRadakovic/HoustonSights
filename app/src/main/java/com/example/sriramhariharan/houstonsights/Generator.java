@@ -136,6 +136,10 @@ public class Generator {
 				29.765771, -95.366506,
 				"Located in Sesquicentennial Park, the garden features an eight-foot bronze sculpture of former president George H. Bush by artist Chas Fagan of Charlotte, North Carolina and a semicircular wall of four bas-reliefs by Houston artist Wei-li Willy Wang that depict President Bush as a Navy pilot in World War II; as a Houston oilman and member of Congress; with Mikhail Gorbachev in managing the peaceful end of the Cold War; and with wife Barbara attending the Inaugural of their oldest son as 43rd president."));
 		locations.add(new Place("Houston Technology Center", "science", "", 29.752232, -95.375682, "The Houston Technology Center is generously supported by more than 300 of Houston’s leading corporations and academic institutions, as well as the Greater Houston Partnership, Texas Medical Center, NASA-Johnson Space Center and the City of Houston. Since 1999, HTC has provided feedback to well over 1,000 companies and coached more than 250 companies."));
+		locations.add(new Place("House 1", "food", "", 29.922562, -95.636716, "This is House 1"));
+		locations.add(new Place("House 2", "food", "", 29.922553, -95.636120, "This is House 2"));
+		locations.add(new Place("House 3", "food", "", 29.923160, -95.635774, "This is House 3"));
+		locations.add(new Place("House 4", "food", "", 29.923637, -95.635863, "This is House 4"));
 		locations.add(new Place("Point 1", "food", "Some Address", 29.90722, -95.66356999999999,
 				"Test 123"));
 		locations.add(new Place("Point 2", "food", "Some Address", 29.91722, -95.66356999999999,
