@@ -252,12 +252,12 @@ public class TourActivity extends AppCompatActivity implements OnMapReadyCallbac
                 mGoogleApiClient);
         if (mLastLocation != null) {
             //putMarker(mLastLocation.getLatitude(),mLastLocation.getLongitude(),"blue");
-            //LatLng latLng = new LatLng(mLastLocation.getLatitude(), mLastLocation.getLongitude());
-            LatLng latLng = new LatLng(29.7522, -95.3756);
+            LatLng latLng = new LatLng(mLastLocation.getLatitude(), mLastLocation.getLongitude());
+            //LatLng latLng = new LatLng(29.7522, -95.3756);
             CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(latLng, 19);
             map.animateCamera(cameraUpdate);  /*                    UNCOMMENT THIS WHEN DONE TESTING*/
-            //places = Generator.getTour(Values.range,mLastLocation.getLatitude(),mLastLocation.getLongitude());
-            places = Generator.getTour(Values.range,29.7522,-95.3756);
+            places = Generator.getTour(Values.range,mLastLocation.getLatitude(),mLastLocation.getLongitude());
+            //places = Generator.getTour(Values.range,29.7522,-95.3756);
             // ErrorSpot
             la.notifyDataSetChanged();
             for(Place p : places){
