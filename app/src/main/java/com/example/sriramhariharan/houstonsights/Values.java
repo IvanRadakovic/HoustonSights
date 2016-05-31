@@ -12,6 +12,7 @@ public class Values {
    public static boolean history = false;
     public static boolean culture = false;
     public static boolean art = false;
+ public static String directiontype = "";
     public static boolean science = false;
     public static boolean food = false;
     public static boolean museum = false;
