@@ -58,7 +58,7 @@ public class LocationAdapter extends BaseAdapter {
         holder.info = (TextView)rowView.findViewById(R.id.moreinfo);
         holder.im = (ImageView) rowView.findViewById(R.id.imaged);
         holder.place.setText(places.get(position).getName());
-     //   holder.info.setText(places.get(position).getInfo());
+        //holder.info.setText(places.get(position).getInfo());
         holder.info.setText("info goes here");
         String tag = "";
         if(places.get(position).getTags().contains(",")) {

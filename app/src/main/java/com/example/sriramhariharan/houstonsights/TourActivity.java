@@ -276,8 +276,8 @@ public class TourActivity extends AppCompatActivity implements OnMapReadyCallbac
                     mGoogleApiClient);
             if (mLastLocation != null) {
                 //putMarker(mLastLocation.getLatitude(),mLastLocation.getLongitude(),"blue");
-                LatLng latLng = new LatLng(mLastLocation.getLatitude(), mLastLocation.getLongitude());
-                //LatLng latLng = new LatLng(29.7522, -95.3756);
+                //LatLng latLng = new LatLng(mLastLocation.getLatitude(), mLastLocation.getLongitude());
+                LatLng latLng = new LatLng(29.7599563, -95.3756);
                 CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(latLng, 19);
                 map.animateCamera(cameraUpdate);  /*                    UNCOMMENT THIS WHEN DONE TESTING*/
                 places = Generator.getTour(Values.range, mLastLocation.getLatitude(), mLastLocation.getLongitude());
@@ -479,7 +479,7 @@ public class TourActivity extends AppCompatActivity implements OnMapReadyCallbac
     public void onLocationChanged(Location location) {
         LatLng point = new LatLng(location.getLatitude(),location.getLongitude());
         Log.e("onLocationChanged", "called");
-        CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(point, 19);
+        /*CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(point, 19);
         map.animateCamera(cameraUpdate); /* UNCOMMENT THIS WHEN DONE TESTING */
         if(places.size()>=2 && Math.abs(location.getLatitude()-places.get(0).getLatitude())<=.0001 &&
                 Math.abs(location.getLongitude()-places.get(0).getLongitude())<=.0001 && poly.size()>0 && markers.size()>0){

@@ -141,10 +141,12 @@ public class Generator {
 		locations.add(new Place("Houston Technology Center", "science", "", 29.752232, -95.375682, "The Houston Technology Center is generously supported by more than 300 of Houston’s leading corporations and academic institutions, as well as the Greater Houston Partnership, Texas Medical Center, NASA-Johnson Space Center and the City of Houston. Since 1999, HTC has provided feedback to well over 1,000 companies and coached more than 250 companies."));
 		locations.add(new Place("House 1", "food", "Address", 29.922713, -95.637421, "This is House 1"));
 		locations.add(new Place("House 2", "food", "Address", 29.922488, -95.637601, "This is House 2"));
-		locations.add(new Place("Point 1", "food", "Some Address", 29.90722, -95.66356999999999,
+		locations.add(new Place("Point 1", "food", "Some Address", 29.90742, -95.66356999999999,
 				"Test 123"));
-		locations.add(new Place("Point 2", "food", "Some Address", 29.91722, -95.66356999999999,
+		locations.add(new Place("Point 2", "food", "Some Address", 29.90742, -95.66376999999999,
 				"Test 12345"));
+		locations.add(new Place("Point 3", "history", "Some Address", 29.90742, -95.66336999999999,
+				"Test 1234567"));
 		return locations;
 	}
 
