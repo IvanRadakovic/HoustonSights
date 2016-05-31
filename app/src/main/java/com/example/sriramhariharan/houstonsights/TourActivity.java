@@ -288,6 +288,10 @@ public class TourActivity extends AppCompatActivity implements OnMapReadyCallbac
                 // places = Generator.getTour(Values.range,29.7522,-95.3756);
                 la = new LocationAdapter(getApplicationContext(), places);
                 yourListView.setAdapter(la);
+                runOnUiThread(new Runnable() {
+                    public void run() {
+                        la.notifyDataSetChanged();
+                    }});
                 yourListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                     @Override
                     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -295,7 +299,6 @@ public class TourActivity extends AppCompatActivity implements OnMapReadyCallbac
                     }
                 });
                 // ErrorSpot
-                la.notifyDataSetChanged();
                 for (Place p : places) {
                     putMarker(p.getLatitude(), p.getLongitude(), "red", p.getName());
                 }
@@ -488,6 +491,9 @@ public class TourActivity extends AppCompatActivity implements OnMapReadyCallbac
             places.remove(0);
         } else if(places.size()==1 && Math.abs(location.getLatitude()-places.get(0).getLatitude())<=.0001 &&
                 Math.abs(location.getLongitude()-places.get(0).getLongitude())<=.0001){
+
+            Intent intent = new Intent(this, Finish.class);
+            startActivity(intent);
             //AddActivity Here
         }
         createPat4(point,places.get(0));
