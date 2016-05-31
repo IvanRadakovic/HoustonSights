@@ -151,24 +151,6 @@ public class Generator {
 		double traveled = 0;
 		tour.add(new Place("Start", "", "", lat, lon, ""));
 
-		while(traveled < maxDistance / 2) {
-			if(locations.size() == 0)
-				return tour;
-			Place min = locations.get(0);
-			for(int j = 0; j < locations.size(); j++) {
-				Place loc = locations.get(j);
-				if(getDistance(tour.get(tour.size() - 1), loc) < getDistance(tour.get(tour.size() - 1), min))
-					min = loc;
-			}
-			double dist = getDistance(tour.get(tour.size() - 1), min);
-			if(traveled + dist + getDistance(tour.get(0), min) <= maxDistance) {
-				tour.add(min);
-				locations.remove(min);
-				traveled += dist;
-			} else
-				return tour;
-		}
-
 		while(true) {
 			if(locations.size() == 0)
 				return tour;
@@ -176,7 +158,8 @@ public class Generator {
 			for(int j = 0; j < locations.size(); j++) {
 				Place loc = locations.get(j);
 				if(getDistance(tour.get(tour.size() - 1), loc) < getDistance(tour.get(tour.size() - 1), min)
-						&& getDistance(tour.get(0), loc) < getDistance(tour.get(0), tour.get(tour.size() - 1)))
+						&& (traveled < maxDistance / 2
+						|| getDistance(tour.get(0), loc) < getDistance(tour.get(0), tour.get(tour.size() - 1))))
 					min = loc;
 			}
 			double dist = getDistance(tour.get(tour.size() - 1), min);
@@ -186,7 +169,6 @@ public class Generator {
 				traveled += dist;
 			} else
 				return tour;
-
 		}
 	}
 
@@ -205,11 +187,11 @@ public class Generator {
 	}
 
 	private static double deg2rad(double deg) {
-		return(deg * Math.PI / 180.0);
+		return (deg * Math.PI / 180.0);
 	}
 
 	private static double rad2deg(double rad) {
-		return(rad * 180 / Math.PI);
+		return (rad * 180 / Math.PI);
 	}
 
 	private static boolean isMatch(Place loc) {
