@@ -5,6 +5,9 @@ import java.util.ArrayList;
 public class Generator {
 	public static ArrayList<Place> getLocations() {
 		ArrayList<Place> locations = new ArrayList<Place>();
+
+		locations.add(new Place("Live At Bayou Place","food","500 Texas Ave, Houston, TX 77002",29.763353,-95.365640,"Nightclub offering a retro lounge, whiskey room, beach-themed hangout & cowboy bar with bull riding."));
+		
 		locations.add(new Place("Space Center Houston", "landmark,science", "1601 NASA Road 1, Houston, TX 77058",
 				29.554064, -95.09647,
 				"Space Center Houston is the official visitor center of the Lyndon B. Johnson Space Center�the National Aeronautics and Space Administration's (NASA) center for human spaceflight activities�located in Houston, Texas. The facility is operated by the nonprofit Manned Spaceflight Educational Foundation Incorporated with design input from Walt Disney Imagineering and designed by award winning experience designer Bob Rogers (designer) and the design team BRC Imagination Arts."));
