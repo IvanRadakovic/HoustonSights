@@ -232,6 +232,32 @@ public class TourActivity extends AppCompatActivity implements OnMapReadyCallbac
         // Add new marker to the Google Map Android API V2
         markers.add(map.addMarker(options));
     }
+    public void putMarker(double lat, double lon, String col, String t){
+
+        LatLng point = new LatLng(lat,lon);
+
+        markerPoints.add(point);
+
+        // Creating MarkerOptions
+        MarkerOptions options = new MarkerOptions();
+
+        // Setting the position of the marker
+        options.position(point);
+        options.title(t);
+
+        /**
+         * For the start location, the color of marker is GREEN and
+         * for the end location, the color of marker is RED.
+         */
+        if (col.equals("blue")) {
+            options.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE));
+        } else {
+            options.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED));
+        }
+
+        // Add new marker to the Google Map Android API V2
+        markers.add(map.addMarker(options));
+    }
     @Override
     public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
 
@@ -253,6 +279,10 @@ public class TourActivity extends AppCompatActivity implements OnMapReadyCallbac
             CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(latLng, 19);
             map.animateCamera(cameraUpdate);  /*                    UNCOMMENT THIS WHEN DONE TESTING*/
             places = Generator.getTour(Values.range,mLastLocation.getLatitude(),mLastLocation.getLongitude());
+            if(places.size()>0) {
+                places.add(places.get(0));
+                places.remove(0);
+            }
             // places = Generator.getTour(Values.range,29.7522,-95.3756);
             la = new LocationAdapter(getApplicationContext(),places);
             yourListView.setAdapter(la);
@@ -265,7 +295,7 @@ public class TourActivity extends AppCompatActivity implements OnMapReadyCallbac
             // ErrorSpot
             la.notifyDataSetChanged();
             for(Place p : places){
-                putMarker(p.getLatitude(),p.getLongitude(),"red");
+                putMarker(p.getLatitude(),p.getLongitude(),"red", p.getName());
             }
             if(places.size()>1)createPath2(places.get(places.size()-1),places.get(0),"norm");
             for(int i=places.size()-1;i>0;i--){
