@@ -43,6 +43,7 @@ public class ChooseTour extends AppCompatActivity {
         landmark = (CheckBox)findViewById(R.id.landmarkcheckbox);
         spiritual = (CheckBox)findViewById(R.id.spiritualcheckbox);
         entertainment = (CheckBox)findViewById(R.id.entertainmentcheckbox);
+        //hello this is srirams change
     }
 
     public void everythingClicked(View view){
