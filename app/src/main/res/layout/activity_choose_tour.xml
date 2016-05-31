@@ -1,0 +1,220 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.sriramhariharan.houstonsights.ChooseTour">
+
+
+    <ScrollView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+
+
+
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:adjustViewBounds="true"
+        android:id="@+id/topbanner"
+        android:src="@drawable/resized"
+        />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:orientation="vertical"
+        android:layout_height="wrap_content"
+
+        android:paddingTop="@dimen/activity_vertical_margin"
+
+        android:layout_below="@id/topbanner"
+        android:layout_centerHorizontal="true"
+        android:id="@+id/linearLayout">
+        <TextView
+            android:layout_width="wrap_content"
+            android:textSize="20dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:text="What do you want to experience?"
+
+            />
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:layout_marginTop="10dp"
+            >
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:orientation="vertical"
+                android:layout_height="wrap_content">
+                <CheckBox
+
+                    android:id="@+id/everythingcheckbox"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Everything"
+                    android:textSize="12dp"
+                    android:onClick="everythingClicked"
+
+                    />
+
+                <CheckBox
+                    android:layout_width="wrap_content"
+                    android:id="@+id/historycheckbox"
+                    android:layout_height="wrap_content"
+                    android:text="History"
+                    android:textSize="12dp"
+                    android:onClick="historyClicked"
+
+                    />
+
+                <CheckBox
+                    android:layout_width="wrap_content"
+                    android:id="@+id/culturecheckbox"
+                    android:layout_height="wrap_content"
+                    android:text="Culture"
+                    android:onClick="cultureClicked"
+                    android:textSize="12dp"
+
+                    />
+
+                <CheckBox
+                    android:layout_width="wrap_content"
+                    android:id="@+id/entertainmentcheckbox"
+                    android:layout_height="wrap_content"
+                    android:text="Entertainment"
+                    android:onClick="entertainmentClicked"
+                    android:textSize="12dp"
+
+                    />
+                <CheckBox
+                    android:layout_width="wrap_content"
+                    android:id="@+id/artcheckbox"
+                    android:layout_height="wrap_content"
+                    android:text="Art"
+                    android:onClick="artClicked"
+                    android:textSize="12dp"
+
+                    />
+                <CheckBox
+                    android:layout_width="wrap_content"
+                    android:id="@+id/sciencecheckbox"
+                    android:layout_height="wrap_content"
+                    android:text="Science"
+                    android:onClick="scienceClicked"
+                    android:textSize="12dp"
+
+                    />
+                <CheckBox
+                    android:layout_width="wrap_content"
+                    android:id="@+id/foodcheckbox"
+                    android:layout_height="wrap_content"
+                    android:text="Food"
+                    android:onClick="foodClicked"
+                    android:textSize="12dp"
+
+                    />
+                <CheckBox
+                    android:layout_width="wrap_content"
+                    android:id="@+id/museumcheckbox"
+                    android:layout_height="wrap_content"
+                    android:text="Museum"
+                    android:onClick="museumClicked"
+                    android:textSize="12dp"
+
+                    />
+                <CheckBox
+                    android:layout_width="wrap_content"
+                    android:id="@+id/shoppingcheckbox"
+                    android:layout_height="wrap_content"
+                    android:text="Shopping"
+                    android:onClick="shoppingClicked"
+                    android:textSize="12dp"
+
+                    />
+                <CheckBox
+                    android:layout_width="wrap_content"
+                    android:id="@+id/parkcheckbox"
+                    android:layout_height="wrap_content"
+                    android:text="Park"
+                    android:onClick="parkClicked"
+                    android:textSize="12dp"
+
+                    />
+                <CheckBox
+                    android:layout_width="wrap_content"
+                    android:id="@+id/landmarkcheckbox"
+                    android:layout_height="wrap_content"
+                    android:text="Landmark"
+                    android:onClick="landmarkClicked"
+                    android:textSize="12dp"
+
+                    />
+                <CheckBox
+                    android:layout_width="wrap_content"
+                    android:id="@+id/spiritualcheckbox"
+                    android:layout_height="wrap_content"
+                    android:text="Spiritual"
+                    android:onClick="spiritualClicked"
+                    android:textSize="12dp"
+
+                    />
+            </LinearLayout>
+
+
+        </ScrollView>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:orientation="horizontal"
+            android:layout_marginTop="20dp"
+            android:layout_height="wrap_content">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="20dp"
+                android:text="Within:"
+                android:layout_marginRight="10dp"
+                />
+
+            <EditText
+                android:layout_width="60dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/editext"
+                android:hint="miles"
+                android:inputType="number|phone"
+                android:textSize="15dp"
+                />
+
+        </LinearLayout>
+        
+
+
+    </LinearLayout>
+        <Button
+            android:layout_marginTop="5dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+
+            android:layout_below="@+id/linearLayout"
+            android:onClick="startTourClicked"
+            android:text="Start Tour"
+            />
+
+
+    </RelativeLayout>
+    </ScrollView>
+
+
+
+</RelativeLayout>
