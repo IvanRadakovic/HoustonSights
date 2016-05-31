@@ -96,10 +96,10 @@ public class TourActivity extends AppCompatActivity implements OnMapReadyCallbac
         setContentView(R.layout.activity_tour);
         yourListView = (ListView)findViewById(R.id.list);
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
-       // Place pl = new Place("hello","hello,","hello",50,50,"HELLO");
-      //  places.add(pl);
-     //   la = new LocationAdapter(getApplicationContext(),places);
-     //   yourListView.setAdapter(la);
+        // Place pl = new Place("hello","hello,","hello",50,50,"HELLO");
+        //  places.add(pl);
+        //   la = new LocationAdapter(getApplicationContext(),places);
+        //   yourListView.setAdapter(la);
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
@@ -160,25 +160,19 @@ public class TourActivity extends AppCompatActivity implements OnMapReadyCallbac
 
             // Setting onclick event listener for the map
             /*map.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
-
                 @Override
                 public void onMapClick(LatLng point) {
-
                     // Already two locations
                     if (markerPoints.size() > 1) {
                         //markerPoints.clear();
                         //map.clear();
                     }
-
                     // Adding new item to the ArrayList
                     markerPoints.add(point);
-
                     // Creating MarkerOptions
                     MarkerOptions options = new MarkerOptions();
-
                     // Setting the position of the marker
                     options.position(point);
-
                     /**
                      * For the start location, the color of marker is GREEN and
                      * for the end location, the color of marker is RED.
@@ -188,10 +182,8 @@ public class TourActivity extends AppCompatActivity implements OnMapReadyCallbac
                     } else {
                         options.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED));
                     }
-
                     // Add new marker to the Google Map Android API V2
                     markers.add(map.addMarker(options));
-
                     createPath();
                 }
             });*/
@@ -261,7 +253,7 @@ public class TourActivity extends AppCompatActivity implements OnMapReadyCallbac
             CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(latLng, 19);
             map.animateCamera(cameraUpdate);  /*                    UNCOMMENT THIS WHEN DONE TESTING*/
             places = Generator.getTour(Values.range,mLastLocation.getLatitude(),mLastLocation.getLongitude());
-           // places = Generator.getTour(Values.range,29.7522,-95.3756);
+            // places = Generator.getTour(Values.range,29.7522,-95.3756);
             la = new LocationAdapter(getApplicationContext(),places);
             yourListView.setAdapter(la);
             yourListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -480,7 +472,7 @@ public class TourActivity extends AppCompatActivity implements OnMapReadyCallbac
             replaceFL(poly);*/
         }
         if(places.size()>=2 && Math.abs(location.getLatitude()-places.get(1).getLatitude())<=.0001 &&
-                Math.abs(location.getLongitude()-places.get(1).getLongitude())<=.0001){
+                Math.abs(location.getLongitude()-places.get(1).getLongitude())<=.0001 && poly.size()>0 && markers.size()>0){
             poly.get(poly.size()-1).remove();
             poly.remove(poly.size()-1);
             markers.get(0).remove();
@@ -645,7 +637,6 @@ public class TourActivity extends AppCompatActivity implements OnMapReadyCallbac
     @Override
     public void onMapReady(GoogleMap googleMap) {
         /*map = googleMap;
-
         // Add a marker in Sydney and move the camera
         LatLng sydney = new LatLng(-34, 151);
         map.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
