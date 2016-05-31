@@ -95,7 +95,7 @@ public class TourActivity extends AppCompatActivity implements OnMapReadyCallbac
         yourListView = (ListView)findViewById(R.id.list);
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         la = new LocationAdapter(getApplicationContext(),places);
-        // yourListView.setAdapter(new LocationAdapter(getApplicationContext(),places));
+        yourListView.setAdapter(la);
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
@@ -258,10 +258,10 @@ public class TourActivity extends AppCompatActivity implements OnMapReadyCallbac
             map.animateCamera(cameraUpdate);  /*                    UNCOMMENT THIS WHEN DONE TESTING*/
             //places = Generator.getTour(Values.range,mLastLocation.getLatitude(),mLastLocation.getLongitude());
             places = Generator.getTour(Values.range,29.7522,-95.3756);
+            // ErrorSpot
             la.notifyDataSetChanged();
             for(Place p : places){
                 putMarker(p.getLatitude(),p.getLongitude(),"red");
-                //addItems(p);
             }
             if(places.size()>1)createPath2(places.get(places.size()-1),places.get(0),"norm");
             for(int i=places.size()-1;i>0;i--){
