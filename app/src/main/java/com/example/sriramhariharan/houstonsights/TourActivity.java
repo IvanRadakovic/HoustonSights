@@ -495,12 +495,12 @@ public class TourActivity extends AppCompatActivity implements OnMapReadyCallbac
             places.remove(0);
         } else if(places.size()==1 && Math.abs(location.getLatitude()-places.get(0).getLatitude())<=.0001 &&
                 Math.abs(location.getLongitude()-places.get(0).getLongitude())<=.0001){
-
             Intent intent = new Intent(this, Finish.class);
             startActivity(intent);
+            places.remove(0);
             //AddActivity Here
         }
-        createPat4(point,places.get(0));
+        if(places.size()>0)createPat4(point,places.get(0));
     }
 
     public void skip(LatLng latLng){
