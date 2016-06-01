@@ -19,7 +19,7 @@ public class SplashActivity extends AppCompatActivity {
                     startActivity(new Intent(SplashActivity.this, ChooseTour.class));
                     finish();
                 }
-            }, secondsDelayed * 500);
+            }, secondsDelayed * 200);
 
             splashLoaded = true;
         }

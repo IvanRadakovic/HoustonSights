@@ -1,5 +1,6 @@
 package com.example.sriramhariharan.houstonsights;
 
+import android.app.ActionBar;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -11,6 +12,8 @@ public class Finish extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_finish);
+        ActionBar ab = getActionBar();
+        ab.setTitle("Tour Finished");
     }
 
     public void restartTour(View view){

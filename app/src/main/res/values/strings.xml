@@ -1,4 +1,4 @@
 <resources>
-    <string name="app_name">HoustonSights</string>
-    <string name="title_activity_tour">Generated Tour</string>
+    <string name="app_name">Houston Sights</string>
+    <string name="title_activity_tour">Tour</string>
 </resources>
