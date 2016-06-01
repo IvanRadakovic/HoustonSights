@@ -24,7 +24,7 @@
         android:onClick="restartTour"
         android:textSize="15dp"
         android:textColor="#fff"
-        android:background="#525252"
+        android:background="@color/colorPrimary"
         />
 
 </RelativeLayout>
