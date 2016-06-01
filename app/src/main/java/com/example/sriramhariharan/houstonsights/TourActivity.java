@@ -74,7 +74,7 @@ public class TourActivity extends AppCompatActivity implements OnMapReadyCallbac
     LocationAdapter la;
     Intent intent;
     public static boolean generated = false;
-    //hello
+    private String key = "key=AIzaSyBmEO5puojjMPol5dctV6h3FCcSUT5kQgg";
 
 
     public void addItems(Place x) {
@@ -103,6 +103,19 @@ public class TourActivity extends AppCompatActivity implements OnMapReadyCallbac
         //  places.add(pl);
         //   la = new LocationAdapter(getApplicationContext(),places);
         //   yourListView.setAdapter(la);
+        button = (Button) findViewById(R.id.button12);
+
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View arg0) {
+                poly.get(poly.size()-1).remove();
+                poly.remove(poly.size()-1);
+                markers.get(0).remove();
+                markers.remove(0);
+                ConvertTextToSpeech(places.get(0).getDescription());
+                places.remove(0);
+            }
+        });
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
@@ -302,16 +315,11 @@ public class TourActivity extends AppCompatActivity implements OnMapReadyCallbac
                         startActivity(intent);
                     }
                 });
-                // ErrorSpot
                 for (Place p : places) {
                     putMarker(p.getLatitude(), p.getLongitude(), "red", p.getName());
                 }
-                if (places.size() > 1)
-                    createPath2(places.get(places.size() - 1), places.get(0), "norm");
                 for (int i = places.size() - 1; i > 0; i--) {
-                    if (i == 1) {
-                        //createPath2(places.get(i-1),places.get(i),"hl");
-                    } else createPath2(places.get(i - 1), places.get(i), "norm");
+                    createPath2(places.get(i - 1), places.get(i), "norm");
                 }
                 if (places.size() > 1) {
                     //nametxt.setText(places.get(1).getName());
@@ -424,8 +432,10 @@ public class TourActivity extends AppCompatActivity implements OnMapReadyCallbac
         // Building the parameters to the web service
         String parameters;
         if(Values.directiontype.equals("Walking")){
+            //parameters = key + "&" + str_origin + "&" + str_dest + "&" + sensor + "&" + transportation;
             parameters = str_origin + "&" + str_dest + "&" + sensor + "&" + transportation;
         } else {
+            //parameters = key + "&" + str_origin + "&" + str_dest + "&" + sensor;
             parameters = str_origin + "&" + str_dest + "&" + sensor;
         }
 
@@ -573,6 +583,7 @@ public class TourActivity extends AppCompatActivity implements OnMapReadyCallbac
                 // Starts parsing data
                 routes = parser.parse(jObject);
             }catch(Exception e){
+                Log.e("Test","Error Has Happened");
                 e.printStackTrace();
             }
             return routes;
