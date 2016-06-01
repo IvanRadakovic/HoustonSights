@@ -216,16 +216,16 @@
 
 
     </LinearLayout>
+
         <Button
             android:layout_marginTop="5dp"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-
             android:layout_below="@+id/linearLayout"
+            android:layout_alignParentBottom="true"
             android:onClick="startTourClicked"
             android:text="Start Tour"
             />
-
 
     </RelativeLayout>
     </ScrollView>
