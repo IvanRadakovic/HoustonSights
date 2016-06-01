@@ -72,6 +72,7 @@ public class TourActivity extends AppCompatActivity implements OnMapReadyCallbac
     GoogleApiClient mGoogleApiClient;
     Button button;
     LocationAdapter la;
+    Intent intent;
     public static boolean generated = false;
     //hello
 
@@ -96,6 +97,7 @@ public class TourActivity extends AppCompatActivity implements OnMapReadyCallbac
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tour);
         yourListView = (ListView)findViewById(R.id.list);
+        intent = new Intent(this, MoreInfo.class);
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         // Place pl = new Place("hello","hello,","hello",50,50,"HELLO");
         //  places.add(pl);
@@ -287,7 +289,6 @@ public class TourActivity extends AppCompatActivity implements OnMapReadyCallbac
                 }
                 // places = Generator.getTour(Values.range,29.7522,-95.3756);
                 la = new LocationAdapter(getApplicationContext(), places);
-                final Intent intent = new Intent(this, MoreInfo.class);
                 yourListView.setAdapter(la);
                 runOnUiThread(new Runnable() {
                     public void run() {
