@@ -586,7 +586,7 @@ public class TourActivity extends AppCompatActivity implements OnMapReadyCallbac
                 Log.e("Test","Error Has Happened");
                 e.printStackTrace();
             }
-            return routes;
+                return routes;
         }
 
         // Executes in UI thread, after the parsing process
