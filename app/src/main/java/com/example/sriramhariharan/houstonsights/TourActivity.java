@@ -287,6 +287,7 @@ public class TourActivity extends AppCompatActivity implements OnMapReadyCallbac
                 }
                 // places = Generator.getTour(Values.range,29.7522,-95.3756);
                 la = new LocationAdapter(getApplicationContext(), places);
+                final Intent intent = new Intent(this, MoreInfo.class);
                 yourListView.setAdapter(la);
                 runOnUiThread(new Runnable() {
                     public void run() {
@@ -295,7 +296,9 @@ public class TourActivity extends AppCompatActivity implements OnMapReadyCallbac
                 yourListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                     @Override
                     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                        Log.d("CLICKED", "hello");
+                        intent.putExtra("title", places.get(position).getName());
+                        intent.putExtra("info",places.get(position).getDescription());
+                        startActivity(intent);
                     }
                 });
                 // ErrorSpot
