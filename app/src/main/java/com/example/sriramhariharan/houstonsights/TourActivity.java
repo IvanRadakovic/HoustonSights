@@ -103,6 +103,7 @@ public class TourActivity extends AppCompatActivity implements OnMapReadyCallbac
         //  places.add(pl);
         //   la = new LocationAdapter(getApplicationContext(),places);
         //   yourListView.setAdapter(la);
+        /*button = (Button) findViewById(R.id.button12);
 
         button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -114,7 +115,7 @@ public class TourActivity extends AppCompatActivity implements OnMapReadyCallbac
                 ConvertTextToSpeech(places.get(0).getDescription());
                 places.remove(0);
             }
-        });
+        });*/
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
@@ -290,8 +291,8 @@ public class TourActivity extends AppCompatActivity implements OnMapReadyCallbac
                     mGoogleApiClient);
             if (mLastLocation != null) {
                 //putMarker(mLastLocation.getLatitude(),mLastLocation.getLongitude(),"blue");
-                //LatLng latLng = new LatLng(mLastLocation.getLatitude(), mLastLocation.getLongitude());
-                LatLng latLng = new LatLng(29.7599563, -95.3756);
+                LatLng latLng = new LatLng(mLastLocation.getLatitude(), mLastLocation.getLongitude());
+                //LatLng latLng = new LatLng(29.7599563, -95.3756);
                 CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(latLng, 19);
                 map.animateCamera(cameraUpdate);  /*                    UNCOMMENT THIS WHEN DONE TESTING*/
                 places = Generator.getTour(Values.range, mLastLocation.getLatitude(), mLastLocation.getLongitude());
@@ -585,7 +586,7 @@ public class TourActivity extends AppCompatActivity implements OnMapReadyCallbac
                 Log.e("Test","Error Has Happened");
                 e.printStackTrace();
             }
-                return routes;
+            return routes;
         }
 
         // Executes in UI thread, after the parsing process
