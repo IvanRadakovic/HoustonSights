@@ -103,7 +103,6 @@ public class TourActivity extends AppCompatActivity implements OnMapReadyCallbac
         //  places.add(pl);
         //   la = new LocationAdapter(getApplicationContext(),places);
         //   yourListView.setAdapter(la);
-        button = (Button) findViewById(R.id.button12);
 
         button.setOnClickListener(new View.OnClickListener() {
             @Override
