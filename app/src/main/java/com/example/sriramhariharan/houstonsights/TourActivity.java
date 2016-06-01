@@ -74,7 +74,7 @@ public class TourActivity extends AppCompatActivity implements OnMapReadyCallbac
     LocationAdapter la;
     Intent intent;
     public static boolean generated = false;
-    private String key = "key=AIzaSyBmEO5puojjMPol5dctV6h3FCcSUT5kQgg";
+    private String key = "key=AIzaSyCf8KGuXLYGU8UNfTvcKoVagcMtWiY65dA";
 
 
     public void addItems(Place x) {
@@ -432,11 +432,11 @@ public class TourActivity extends AppCompatActivity implements OnMapReadyCallbac
         // Building the parameters to the web service
         String parameters;
         if(Values.directiontype.equals("Walking")){
-            //parameters = key + "&" + str_origin + "&" + str_dest + "&" + sensor + "&" + transportation;
-            parameters = str_origin + "&" + str_dest + "&" + sensor + "&" + transportation;
+            parameters = key + "&" + str_origin + "&" + str_dest + "&" + sensor + "&" + transportation;
+            //parameters = str_origin + "&" + str_dest + "&" + sensor + "&" + transportation;
         } else {
-            //parameters = key + "&" + str_origin + "&" + str_dest + "&" + sensor;
-            parameters = str_origin + "&" + str_dest + "&" + sensor;
+            parameters = key + "&" + str_origin + "&" + str_dest + "&" + sensor;
+            //parameters = str_origin + "&" + str_dest + "&" + sensor;
         }
 
         // Output format
